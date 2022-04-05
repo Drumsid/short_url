@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create link</h1>
+    <h1>Edite link</h1>
     @if ($errors->any())
         <div>
             <ul>
@@ -11,24 +11,24 @@
             </ul>
         </div>
     @endif
-    <form method="POST" action="{{ route("links.store") }}">
+    <form method="POST" action="{{ route("links.update", ["link" => $link->id]) }}">
         @csrf
-        <div class="form-group mb-3">
-            <label for="Title" class="form-label">Title</label>
-            <input type="text" name="title" class="form-control" id="Title">
-        </div>
+        @method('PUT')
+{{--        <div class="form-group mb-3">--}}
+{{--            <label for="Title" class="form-label">Title</label>--}}
+{{--            <input type="text" name="title" class="form-control" id="Title" value="{{ $link->title }}">--}}
+{{--        </div>--}}
         <div class="form-group mb-3">
             <label for="Link" class="form-label">Link</label>
-            <input type="text" name="long_link" class="form-control" id="Link">
+            <input type="text" name="long_link" class="form-control" id="Link" value="{{ $link->long_link }}">
         </div>
 
         <div class="form-group">
             <label for="tags">Tags</label>
             <select class="form-control" data-placeholder="Choose tags" id="tags" name="tags[]" multiple="multiple">
                 @foreach($tags as $id => $tag)
-                    <option value="{{$id}}" @if (old('tag_id')==$id) selected @endif>
-                        {{$tag}}
-                    </option>
+                    <option @if (in_array($id, $link->tags->pluck('id')->all())) selected @endif
+                    value="{{$id}}">{{$tag}}</option>
                 @endforeach
             </select>
         </div>

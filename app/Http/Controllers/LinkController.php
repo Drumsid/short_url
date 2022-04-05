@@ -53,45 +53,60 @@ class LinkController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Link  $links
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Link  $link
+     * @return \Illuminate\View\View
      */
-    public function show(Link $links)
+    public function show(Link $link)
     {
-        //
+        return view("links.show", compact("link"));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Link  $links
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Link  $link
+//     * @return \Illuminate\Http\Response
      */
-    public function edit(Link $links)
+    public function edit(Link $link)
     {
-        //
+//        dd($link);
+//        $link = Link::where('id', $link)->first();
+//        if (! $link) {
+//            return back()->with('error', 'Ссылка не найдена!');
+//        }
+        $tags = Tag::pluck('name', 'id')->all();
+        return view('links.edite', compact('link',  'tags'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Link  $links
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Link  $link
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Link $links)
+    public function update(Request $request, Link $link)
     {
-        //
+        $data = $this->validate($request, [
+//            'title' => 'required|min:3|unique:links,title',
+            'long_link' => 'required|min:3',
+        ]);
+
+        $link->update($data);
+        $link->tags()->sync($request->tags);
+        return redirect()->route('links.index')->with('success', 'Ссылка обновлена!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Link  $links
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Link $links)
+    public function destroy(Link $link)
     {
-        //
+        $link->delete();
+        return redirect()
+            ->route('links.index')->with('success', 'Link deleted successfully!');
     }
 }
