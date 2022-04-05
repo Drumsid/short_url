@@ -21,7 +21,7 @@
             <tr>
                 <th>{{ $key + 1 }}</th>
                 <td>{{ $link->title }}</td>
-                <td>{{ $link->short_link }}</td>
+                <td><a href="{{ $link->long_link }}" target="_blank">{{ $link->short_link }}</a></td>
                 <td>{{ $link->long_link }}</td>
                 <td>{{$link->tags->pluck('name')->join(', ')}}</td>
                 <td>{{ $link->updated_at }}</td>
