@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class LinkController extends Controller
 {
+    private $generateLink;
+
+    public function __construct(GenerateShortLinkController $generateLink)
+    {
+        $this->generateLink = $generateLink;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +48,7 @@ class LinkController extends Controller
             'title' => 'required|min:3|unique:links,title',
             'long_link' => 'required|min:3',
         ]);
-        $data["short_link"] = "test";
+        $data["short_link"] = $this->generateLink->generateShortLink();
         $link = new Link();
         $link->fill($data);
         $link->save();
