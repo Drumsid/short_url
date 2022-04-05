@@ -14,8 +14,8 @@ class Links extends Model
         'short_link', 'long_link', 'title'
     ];
 
-    public function tasks(): BelongsToMany
+    public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tags::class);
     }
 }

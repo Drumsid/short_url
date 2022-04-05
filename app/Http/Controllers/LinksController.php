@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Links;
+use App\Models\Tags;
 use Illuminate\Http\Request;
 
 class LinksController extends Controller
@@ -14,7 +15,8 @@ class LinksController extends Controller
      */
     public function index()
     {
-        return view("links.index");
+        $links = Links::all();
+        return view("links.index", compact("links"));
     }
 
     /**
@@ -24,7 +26,8 @@ class LinksController extends Controller
      */
     public function create()
     {
-        return view("links.create");
+        $tags = Tags::pluck('name', 'id')->all();
+        return view("links.create", compact("tags"));
     }
 
     /**
@@ -35,7 +38,12 @@ class LinksController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
+
+        $link = new Links();
+        $link->fill($request->all());
+        $link->tags()->sync($request->tags);
+        return redirect()->route('links.index')->with('success', 'Статья добавлена!');
     }
 
     /**

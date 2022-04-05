@@ -13,7 +13,7 @@ class Tags extends Model
         'name',
     ];
 
-    public function tasks(): BelongsToMany
+    public function links(): BelongsToMany
     {
         return $this->belongsToMany(Links::class);
     }
