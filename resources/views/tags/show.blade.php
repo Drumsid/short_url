@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Tags index</h1>
-
+    <h1>Show tag</h1>
     <p>Tag Name: {{ $tag->name }}</p>
     <p>Tag Date: {{ $tag->updated_at }}</p>
 

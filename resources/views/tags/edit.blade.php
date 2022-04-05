@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create tag</h1>
+    <h1>Edite tag</h1>
     @if ($errors->any())
         <div>
             <ul>
@@ -18,7 +18,7 @@
             <label for="Link" class="form-label">Tag name</label>
             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="Link" value="{{ $tag->name }}">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
 
 @endsection
