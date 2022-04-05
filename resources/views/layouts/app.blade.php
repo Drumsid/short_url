@@ -61,11 +61,14 @@
             {{ session('success') }}
         </div>
     @endif
-    @if (session('errors'))
-        <div class="alert alert-danger">
-            {{ session('errors') }}
-        </div>
-    @endif
+{{--    @if (session('errors'))--}}
+{{--        @foreach(session('errors') as $error)--}}
+{{--            <div class="alert alert-danger">--}}
+{{--                {{ $error }}--}}
+{{--            </div>--}}
+{{--        @endforeach--}}
+
+{{--    @endif--}}
     @yield('content')
 
 </main>

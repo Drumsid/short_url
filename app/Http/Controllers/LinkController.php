@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use App\Models\Tag;
+use App\Rules\ValidUrl;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class LinkController extends Controller
 {
@@ -44,10 +46,11 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
-        $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
+//        $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
         $data = $this->validate($request, [
             'title' => 'required|min:3|unique:links,title',
-            'long_link' => 'required|min:3|url|regex:'.$regex,
+//            'long_link' => 'required|min:3|regex:'.$regex,
+            'long_link' => ['required', new ValidUrl()],
         ]);
         $data["short_link"] = $this->generateLink->generateShortLink();
         $link = new Link();

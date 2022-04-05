@@ -15,11 +15,11 @@
         @csrf
         <div class="form-group mb-3">
             <label for="Title" class="form-label">Title</label>
-            <input type="text" name="title" class="form-control" id="Title">
+            <input type="text" name="title" class="form-control  @error('title') is-invalid @enderror" id="Title">
         </div>
         <div class="form-group mb-3">
             <label for="Link" class="form-label">Link</label>
-            <input type="text" name="long_link" class="form-control" id="Link">
+            <input type="text" name="long_link" class="form-control @error('long_link') is-invalid @enderror" id="Link">
         </div>
 
         <div class="form-group">
