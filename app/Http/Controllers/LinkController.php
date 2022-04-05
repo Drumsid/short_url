@@ -44,9 +44,10 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
+        $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
         $data = $this->validate($request, [
             'title' => 'required|min:3|unique:links,title',
-            'long_link' => 'required|min:3',
+            'long_link' => 'required|min:3|url|regex:'.$regex,
         ]);
         $data["short_link"] = $this->generateLink->generateShortLink();
         $link = new Link();
