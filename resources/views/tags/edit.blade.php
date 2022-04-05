@@ -11,11 +11,12 @@
             </ul>
         </div>
     @endif
-    <form method="POST" action="{{ route("tags.store") }}">
+    <form method="POST" action="{{ route("tags.update", ["tag" => $tag->id]) }}">
         @csrf
+        @method('PUT')
         <div class="mb-3">
             <label for="Link" class="form-label">Tag name</label>
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="Link" value="{{ old("name") }}">
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="Link" value="{{ $tag->name }}">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
