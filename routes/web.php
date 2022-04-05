@@ -16,7 +16,7 @@ use App\Http\Controllers\LinksController;
 
 Route::get('/', function () {
     return view('mainPage');
-});
+})->name("mainPage");
 Route::resources([
     'links' => LinksController::class,
 ]);
