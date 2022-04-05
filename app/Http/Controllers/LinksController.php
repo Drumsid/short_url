@@ -20,11 +20,11 @@ class LinksController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        //
+        return view("links.create");
     }
 
     /**
@@ -35,7 +35,7 @@ class LinksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
