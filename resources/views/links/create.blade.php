@@ -2,6 +2,15 @@
 
 @section('content')
     <h1>Create link</h1>
+    @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li class="text-danger">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="POST" action="{{ route("links.store") }}">
         @csrf
         <div class="form-group mb-3">

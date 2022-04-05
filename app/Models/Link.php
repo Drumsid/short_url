@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Tags extends Model
+class Link extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'name',
+        'short_link', 'long_link', 'title'
     ];
 
-    public function links(): BelongsToMany
+    public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Links::class);
+        return $this->belongsToMany(Tag::class);
     }
 }

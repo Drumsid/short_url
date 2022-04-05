@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tags;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class TagsController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        $tags = Tags::all();
+        $tags = Tag::all();
         return view("tags.index", compact("tags"));
     }
 
@@ -40,7 +40,7 @@ class TagsController extends Controller
             'name' => 'required|min:3|unique:tags,name',
         ]);
 
-        $tag = new Tags();
+        $tag = new Tag();
         $tag->fill($data);
         $tag->save();
         return redirect()
@@ -50,10 +50,10 @@ class TagsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tags  $tag
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\View\View
      */
-    public function show(Tags $tag)
+    public function show(Tag $tag)
     {
         return view("tags.show", compact("tag"));
     }
@@ -61,10 +61,10 @@ class TagsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tags  $tags
+     * @param  \App\Models\Tag  $tags
      * @return \Illuminate\View\View
      */
-    public function edit(Tags $tag)
+    public function edit(Tag $tag)
     {
         return view("tags.edit", compact("tag"));
     }
@@ -73,10 +73,10 @@ class TagsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tags  $tag
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Tags $tag)
+    public function update(Request $request, Tag $tag)
     {
         $data = $this->validate($request, [
             'name' => 'required|min:3|unique:tags,name',
@@ -91,10 +91,10 @@ class TagsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tags  $tag
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Tags $tag)
+    public function destroy(Tag $tag)
     {
         $tag->delete();
         return redirect()

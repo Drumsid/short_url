@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LinksController;
-use App\Http\Controllers\TagsController;
+use App\Http\Controllers\LinkController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +19,6 @@ Route::get('/', function () {
     return view('mainPage');
 })->name("mainPage");
 Route::resources([
-    'links' => LinksController::class,
-    'tags' => TagsController::class,
+    'links' => LinkController::class,
+    'tags' => TagController::class,
 ]);

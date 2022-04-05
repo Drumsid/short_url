@@ -2,13 +2,16 @@
 
 @section('content')
     <h1>Links index</h1>
-    <a class="btn btn-primary" href="{{ route("links.create") }}" role="button">Create link</a>
+    <a class="btn btn-primary mb-5 mt-5" href="{{ route("links.create") }}" role="button">Create link</a>
 
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Title</th>
+            <th scope="col">Short link</th>
+            <th scope="col">Long link</th>
+            <th scope="col">Tags</th>
             <th scope="col">Date</th>
             <th scope="col">Action</th>
         </tr>
@@ -17,15 +20,18 @@
         @forelse ($links as $key => $link)
             <tr>
                 <th>{{ $key + 1 }}</th>
-                <td>{{ $link->name }}</td>
+                <td>{{ $link->title }}</td>
+                <td>{{ $link->short_link }}</td>
+                <td>{{ $link->long_link }}</td>
+                <td>{{$link->tags->pluck('name')->join(', ')}}</td>
                 <td>{{ $link->updated_at }}</td>
                 <td style="white-space: nowrap; ">
                     <a class="btn btn-primary btn-sm float-left mr-1"
-                       href="{{ route("links.show", ['tag' => $link->id]) }}">
+                       href="{{ route("links.show", ['link' => $link->id]) }}">
                         <i class="fa fa-eye" aria-hidden="true"></i>
                     </a>
                     <a class="btn btn-primary btn-sm float-left mr-1"
-                       href="{{ route("links.edit", ['tag' => $link->id]) }}">
+                       href="{{ route("links.edit", ['link' => $link->id]) }}">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
                     <form action="{{ route('links.destroy', $link) }}" method="post"
