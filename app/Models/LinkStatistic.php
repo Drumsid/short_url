@@ -12,4 +12,9 @@ class LinkStatistic extends Model
     protected $fillable = [
         'user_agent', 'user_ip', 'link_id'
     ];
+
+    public function links()
+    {
+        return $this->belongsTo(Link::class);
+    }
 }

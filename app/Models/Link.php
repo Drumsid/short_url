@@ -18,4 +18,16 @@ class Link extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function linkStatistics()
+    {
+        return $this->hasMany(LinkStatistic::class);
+    }
+
+    public function sort($param = [["updated_at", "desc"]])
+    {
+          return  $this->linkStatistics
+              ->sortBy($param)
+              ->all();
+    }
 }
