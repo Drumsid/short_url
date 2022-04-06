@@ -3,7 +3,7 @@
 @section('content')
     <h1>Show link</h1>
     <p>Link title: {{ $link->title }}</p>
-    <p>Short link: <a href="{{ $link->short_link }}" target="_blank">{{ $link->short_link }}</a></p>
+    <p>Short link: <a href="/{{ $link->short_link }}" target="_blank">{{ $link->short_link }}</a></p>
     <p>Long link: {{ $link->long_link }}</p>
     <p>Link Tags: {{$link->tags->pluck('name')->join(', ')}}</p>
     <p>Link Date: {{ $link->updated_at }}</p>
