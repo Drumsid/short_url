@@ -18,7 +18,6 @@ class LinkRedirectController extends Controller
 
     public function redirect(Request $request, $shortLink)
     {
-//        dd($shortLink);
         $link = Link::where('short_link', $shortLink)->first();
         if ($link) {
             $statisticData = $this->stat->getStatistic($request, $link);
@@ -27,6 +26,6 @@ class LinkRedirectController extends Controller
             $linkStat->save();
             return redirect()->away($link->long_link);
         }
-        return redirect()->route('mainPage')->with('errors', 'Error! Short link das not exists!');
+        return redirect()->route('mainPage')->with('warning', 'Warning! Short link das not exists!');
     }
 }

@@ -44,14 +44,14 @@
             {{ session('success') }}
         </div>
     @endif
-{{--    @if (session('errors'))--}}
-{{--        @foreach(session('errors') as $error)--}}
-{{--            <div class="alert alert-danger">--}}
-{{--                {{ $error }}--}}
-{{--            </div>--}}
+    @if (session('warning'))
+{{--        @foreach(session('warning') as $warning)--}}
+            <div class="alert alert-warning">
+                {{ session('warning') }}
+            </div>
 {{--        @endforeach--}}
 
-{{--    @endif--}}
+    @endif
     @yield('content')
 
 </main>
