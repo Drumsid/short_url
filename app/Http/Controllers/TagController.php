@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TagRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -34,11 +35,9 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
-        $data = $this->validate($request, [
-            'name' => 'required|min:3|unique:tags,name',
-        ]);
+        $data = $request->validated();
 
         $tag = new Tag();
         $tag->fill($data);
@@ -76,11 +75,9 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag)
     {
-        $data = $this->validate($request, [
-            'name' => 'required|min:3|unique:tags,name',
-        ]);
+        $data = $request->validated();
 
         $tag->fill($data);
         $tag->save();
