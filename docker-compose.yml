@@ -36,6 +36,19 @@ services:
     ports:
         - "65432:5432"
 
+  postgres-test:
+      container_name: url-short-postgres-test
+      image: postgres:12
+      volumes:
+          - ./docker/postgres_test:/var/lib/postgresql/data
+      restart: always
+      environment:
+          POSTGRES_DB: test_db-test
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: secret
+      ports:
+          - "35432:5432"
+
 
   pgadmin:
       container_name: url-short-pgadmin4

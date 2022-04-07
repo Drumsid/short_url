@@ -6,7 +6,6 @@ use App\Models\Link;
 use App\Models\Tag;
 use App\Rules\ValidUrl;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
 
 class LinkController extends Controller
 {
@@ -46,10 +45,8 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
-//        $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
         $data = $this->validate($request, [
-            'title' => 'required|min:3|unique:links,title',
-//            'long_link' => 'required|min:3|regex:'.$regex,
+            'title' => 'required|min:3',
             'long_link' => ['required', new ValidUrl()],
         ]);
         $data["short_link"] = $this->generateLink->generateShortLink();
@@ -79,11 +76,6 @@ class LinkController extends Controller
      */
     public function edit(Link $link)
     {
-//        dd($link);
-//        $link = Link::where('id', $link)->first();
-//        if (! $link) {
-//            return back()->with('error', 'Ссылка не найдена!');
-//        }
         $tags = Tag::pluck('name', 'id')->all();
         return view('links.edite', compact('link',  'tags'));
     }
@@ -98,8 +90,8 @@ class LinkController extends Controller
     public function update(Request $request, Link $link)
     {
         $data = $this->validate($request, [
-//            'title' => 'required|min:3|unique:links,title',
-            'long_link' => 'required|min:3',
+            'title' => 'required|min:3',
+            'long_link' => ['required', new ValidUrl()],
         ]);
 
         $link->update($data);

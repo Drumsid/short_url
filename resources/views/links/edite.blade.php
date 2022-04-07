@@ -14,10 +14,10 @@
     <form method="POST" action="{{ route("links.update", ["link" => $link->id]) }}">
         @csrf
         @method('PUT')
-{{--        <div class="form-group mb-3">--}}
-{{--            <label for="Title" class="form-label">Title</label>--}}
-{{--            <input type="text" name="title" class="form-control" id="Title" value="{{ $link->title }}">--}}
-{{--        </div>--}}
+        <div class="form-group mb-3">
+            <label for="Title" class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" id="Title" value="{{ $link->title }}">
+        </div>
         <div class="form-group mb-3">
             <label for="Link" class="form-label">Link</label>
             <input type="text" name="long_link" class="form-control" id="Link" value="{{ $link->long_link }}">

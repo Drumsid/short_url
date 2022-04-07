@@ -14,7 +14,7 @@ class TagsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->title
         ];
     }
 }

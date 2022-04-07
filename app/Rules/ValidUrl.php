@@ -32,6 +32,7 @@ class ValidUrl implements Rule
         {
             return false;
         }
+//нужно придумать проверку на не рабочие ссылки, а то вылетает исключение.['http_errors' => false]
         $res = $this->client->request('GET', $value);
         return $res->getStatusCode() == '200';
     }
