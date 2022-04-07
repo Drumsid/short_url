@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LinkRequest;
 use App\Models\Link;
 use App\Models\Tag;
 use App\Rules\ValidUrl;
@@ -40,15 +41,12 @@ class LinkController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\LinkRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(LinkRequest $request)
     {
-        $data = $this->validate($request, [
-            'title' => 'required|min:3',
-            'long_link' => ['required', new ValidUrl()],
-        ]);
+        $data = $request->validated();
         $data["short_link"] = $this->generateLink->generateShortLink();
         $link = new Link();
         $link->fill($data);
@@ -83,17 +81,13 @@ class LinkController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\LinkRequest  $request
      * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Link $link)
+    public function update(LinkRequest $request, Link $link)
     {
-        $data = $this->validate($request, [
-            'title' => 'required|min:3',
-            'long_link' => ['required', new ValidUrl()],
-        ]);
-
+        $data = $request->validated();
         $link->update($data);
         $link->tags()->sync($request->tags);
         return redirect()->route('links.index')->with('success', 'Ссылка обновлена!');
