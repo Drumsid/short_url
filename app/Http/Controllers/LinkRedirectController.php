@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use App\Models\LinkStatistic;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class LinkRedirectController extends Controller
 {
@@ -16,7 +16,7 @@ class LinkRedirectController extends Controller
         $this->stat = $stat;
     }
 
-    public function redirect(Request $request, $shortLink)
+    public function redirect(Request $request, $shortLink) : RedirectResponse
     {
         $link = Link::where('short_link', $shortLink)->first();
         if ($link) {

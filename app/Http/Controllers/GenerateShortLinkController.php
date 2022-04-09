@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class GenerateShortLinkController extends Controller
 {
-    public function generateShortLink($length = 10)
+    public function generateShortLink( int $length = 10) : string
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);

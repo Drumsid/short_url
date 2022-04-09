@@ -32,8 +32,8 @@ class ValidUrl implements Rule
         {
             return false;
         }
-//нужно придумать проверку на не рабочие ссылки, а то вылетает исключение.['http_errors' => false]
-        $res = $this->client->request('GET', $value);
+        $res = $this->client->request('GET', $value, ['http_errors' => false]);
+
         return $res->getStatusCode() == '200';
     }
 
@@ -44,6 +44,6 @@ class ValidUrl implements Rule
      */
     public function message()
     {
-        return 'Not valid Url!.';
+        return 'Not valid Url or url das not exists!';
     }
 }
