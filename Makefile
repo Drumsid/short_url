@@ -6,9 +6,11 @@ setup:
 stop:
 	docker-compose down
 
-#запуск композера внутри докера
+
 install:
 	docker exec -it url-short-php-fpm composer install
+	cp -n .env.example .env || true
+	php artisan key:generate
 
 #заходим в bash
 bash:
