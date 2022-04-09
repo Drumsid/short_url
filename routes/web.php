@@ -25,6 +25,6 @@ Route::resources([
     'tags' => TagController::class,
 ]);
 
-Route::get('/statistics', [LinkStatisticController::class, "index"]);
+Route::get('/statistics', [LinkStatisticController::class, "index"])->name("statistics");
 
 Route::get('/{shortLink}', [LinkRedirectController::class, 'redirect']);

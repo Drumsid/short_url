@@ -19,6 +19,12 @@ class LinkStatisticControllerTest extends TestCase
         $this->link = Link::factory()->create();
     }
 
+    public function testIndex(): void
+    {
+        $response = $this->get(route("statistics"));
+        $response->assertStatus(200);
+    }
+
     public function testGetStatistic() : void
     {
         $statistic = New LinkStatisticController();

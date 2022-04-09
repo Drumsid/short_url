@@ -17,7 +17,6 @@ class LinkControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-//        $this->refreshDatabase();
         $this->link = Link::factory()->create();
     }
 
