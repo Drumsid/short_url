@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LinkRedirectController;
+use App\Http\Controllers\LinkStatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,7 @@ Route::resources([
     'links' => LinkController::class,
     'tags' => TagController::class,
 ]);
+
+Route::get('/statistics', [LinkStatisticController::class, "index"]);
 
 Route::get('/{shortLink}', [LinkRedirectController::class, 'redirect']);
